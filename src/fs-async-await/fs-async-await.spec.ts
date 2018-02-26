@@ -10,8 +10,8 @@ import {writeFilePromise} from './fs-promise';
 import {appendFilePromise} from './fs-promise';
 import {deleteFilePromise} from './fs-promise';
 
-const dirPath = 'transform/src/fs-async-await/fs-async-await-test-dir/';
-const filePath = 'transform/src/fs-async-await/fs-async-await-test-dir/dir-2/file-2-1.txt';
+const dirPath = 'src/fs-async-await/fs-async-await-test-dir/';
+const filePath = 'src/fs-async-await/fs-async-await-test-dir/dir-2/file-2-1.txt';
 
 describe('filesPromise function used with async await', () => {
 
@@ -121,7 +121,7 @@ describe('writeFileasync function', () => {
         }
     
     it('writes a file with a certain content', done => {
-        const filePathDir = 'transform/src/fs-async-await/fs-async-await-test-dir-output/';
+        const filePathDir = 'src/fs-async-await/fs-async-await-test-dir-output/';
         const fileName = 'file-w.txt';
         const content = [
             'first line',
