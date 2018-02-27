@@ -1,8 +1,11 @@
 
 // launch the read-transform-write-log logic reading the block size from command line
 //
+// First of all COMPILE
 // npm run tsc
-// 
+//
+// Run with block of size 1 (i.e. sequentialy)
+// node dist/canti-divina-commedia-transform/_transform.js 1
 
 import {readTransformWriteCantiBlocks} from './read-transform-write-canti-blocks';
 import {config} from '../config';
@@ -21,8 +24,3 @@ readTransformWriteCantiBlocks(blockSize, sourceDir)
         console.log('elapsed ' + (end - start));
     }
 )
-
-console.log('process.argv[2]', process.argv[2]);
-console.log('process.argv', process.argv);
-console.log('blockSize', blockSize);
-console.log('sourceDir', sourceDir)
