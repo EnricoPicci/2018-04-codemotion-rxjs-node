@@ -1,10 +1,9 @@
 
-// import {deleteDirObs} from '../fs-observables/fs-observables';
-import {readTransformWriteCantiBlocks} from './read-transform-write-canti-blocks';
+import {readTransformWriteCantiConcurrency} from './read-transform-write-canti-concurrency';
 import {config} from '../config';
 
 const start = Date.now();
-readTransformWriteCantiBlocks(1000, config.divinaCommediaCantiDirMany)
+readTransformWriteCantiConcurrency(1000, config.divinaCommediaCantiDirMany)
 .subscribe(
     undefined,
     err => console.error(err),

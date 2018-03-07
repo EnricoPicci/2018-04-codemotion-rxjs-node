@@ -13,7 +13,8 @@ import {writeFileObs} from '../fs-observables/fs-observables';
 import {config} from '../config';
 
 // creates many copies of the 100 Canti into one directory - this is to create many files
-export function duplicateCanti(numberOfDuplications: number) {
+export function duplicateCanti(numberOfDuplications: number, concurrencyLevel?: number) {
+    // concurrencyLevel ? concurrencyLevel : 1;
     return fileListObs(config.divinaCommediaCantiDir)
     .switchMap(cantiFileNames => Observable.from(cantiFileNames))
     .mergeMap(cantoFileName => readLinesObs(cantoFileName)
@@ -21,13 +22,11 @@ export function duplicateCanti(numberOfDuplications: number) {
                                     return {name: cantoFileName, content: cantoLines};
                                 })
     )
-    .bufferCount(100)
-    .mergeMap(canti => Observable.range(1, numberOfDuplications)
-                                    .map(iteration => {return {iteration, canti}})
+    .mergeMap(canto => Observable.range(1, numberOfDuplications)
+                                    .map(iteration => {return {iteration, canto}})
     )
-    .map(iterationCanti => iterationCanti.canti.map(canto => iteratedCanto(canto, iterationCanti.iteration)))
-    .mergeMap(canti => Observable.from(canti))
-    .mergeMap(canto => writeFileObs(canto.name, canto.content))
+    .map(iterationCanto => iteratedCanto(iterationCanto.canto, iterationCanto.iteration))
+    .mergeMap(canto => writeFileObs(canto.name, canto.content), concurrencyLevel);
 }
 
 function iteratedCanto(canto, iteration: number) {
